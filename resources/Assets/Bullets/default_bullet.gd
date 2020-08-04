@@ -19,10 +19,15 @@ func _physics_process(delta):
 	move_and_collide(bullet_speed * bullet_direction * delta)
 	pass
 
-func on_hit(body):
-	self.queue_free()
-	pass
+func set_direction(direction):
+	bullet_direction = direction
 
 func _on_Area2D_body_entered(body):
 	on_hit(body)
 	pass # Replace with function body.
+
+#when the bullet hits something
+func on_hit(body):
+	self.queue_free()
+	pass
+

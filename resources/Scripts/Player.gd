@@ -14,21 +14,25 @@ var player_velocity := Vector2()
 enum Direction{UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT}
 var current_direction = Direction.UP
 
-var player_angle = 0
+var player_angle := 0
 
-var shield_health = 10
-var shield_pressed = false
+var shield_health := 10
+var shield_pressed := false
 
-var is_shooting = false
+var is_shooting := false
 
-var special_pressed = false
+var special_pressed := false
 
-var melee_pressed = false
+var melee_pressed := false
 
 enum States{IDLE, WALK, DASH} #ONLY ALLOWED TO HAVE ONE STATE AT A TIME
 var current_state = States.IDLE
+
+onready var current_gun = get_node("Gun")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_gun_rotation()
 	pass # Replace with function body.
 
 
@@ -37,6 +41,7 @@ func _physics_process(delta):
 	get_input(delta)
 	set_movement(delta)
 	set_direction()
+	set_gun_rotation()
 	set_state(delta)
 	do_attack(delta)
 	pass
@@ -85,7 +90,7 @@ func set_movement(delta):
 	pass
 
 func set_direction():
-	player_angle = atan2(player_velocity.y, player_velocity.x)
+	player_angle = atan2(y_input, x_input)
 	
 	#SET DIRECTION
 	if(rad2deg(player_angle) > -45/2 and rad2deg(player_angle) < 45/2):
@@ -104,6 +109,10 @@ func set_direction():
 		current_direction = Direction.DOWN
 	elif(rad2deg(player_angle) > 45/2 and rad2deg(player_angle) < 135/2):
 		current_direction = Direction.DOWN_RIGHT
+	pass
+
+func set_gun_rotation():
+	current_gun.rotation_degrees = rad2deg(player_angle)
 	pass
 
 func set_state(delta):
@@ -127,10 +136,9 @@ func do_during_dash(delta):
 
 func do_attack(delta):
 	if(is_shooting):
-		var bullet_prefab = preload("res://resources/Assets/Bullets/default_bullet.tscn")
-		var bullet = bullet_prefab.instance()
-		bullet.bullet_direction = Vector2(cos(player_angle), sin(player_angle))
-		add_child(bullet)
+		var direction := Vector2(cos(player_angle), sin(player_angle))
+		current_gun.shoot(direction)
+		pass
 	pass
 
 func _to_string():
@@ -169,7 +177,7 @@ func _to_string():
 	
 	player_string += "\n"
 	
-	player_string += "Angle: " + str(player_angle * (360 / (2 * PI))) + "\n"
+	player_string += "Angle: " + str(rad2deg(player_angle)) + "\n"
 	
 	player_string += "Shield: " + str(shield_pressed) + "\nShield Health: " + str(shield_health) + "\n"
 	
