@@ -50,30 +50,15 @@ func get_input(delta):
 	x_input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	y_input = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	
-	if(Input.is_action_pressed("shield")):
-		shield_pressed = true
-	else:
-		shield_pressed = false
+	shield_pressed = Input.is_action_pressed("shield")
 	
-	if(Input.is_action_pressed("dash_button")):
-		is_dashing = true
-	else:
-		is_dashing = false
+	is_dashing = Input.is_action_pressed("dash_button")
 	
-	if(Input.is_action_pressed("shoot")):
-		is_shooting = true
-	else:
-		is_shooting = false
+	is_shooting = Input.is_action_pressed("shoot")
 	
-	if(Input.is_action_pressed("special_move")):
-		special_pressed = true
-	else:
-		special_pressed = false
+	special_pressed = Input.is_action_pressed("special_move")
 	
-	if(Input.is_action_pressed("interact_melee")):
-		melee_pressed = true
-	else:
-		melee_pressed = false
+	melee_pressed = Input.is_action_pressed("interact_melee")
 	
 	pass
 
