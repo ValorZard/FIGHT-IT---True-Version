@@ -90,8 +90,8 @@ func set_movement(delta):
 	pass
 
 func set_direction():
-	player_angle = atan2(y_input, x_input)
-	
+	player_angle = atan2(player_velocity.y, player_velocity.x)
+	print(rad2deg(player_angle))
 	#SET DIRECTION
 	if(rad2deg(player_angle) > -45/2 and rad2deg(player_angle) < 45/2):
 		current_direction = Direction.RIGHT

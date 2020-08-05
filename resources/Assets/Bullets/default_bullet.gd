@@ -5,7 +5,7 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 
-var bullet_speed := 100
+var bullet_speed := 1000
 var bullet_direction := Vector2()
 
 
