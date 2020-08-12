@@ -9,6 +9,11 @@ script = ExtResource( 2 )
 [node name="GunSprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 25, 0 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="BulletExit" type="Node2D" parent="GunSprite"]
+[node name="BulletExit" type="Node2D" parent="."]
 position = Vector2( 35.7503, -6.29961 )
+
+[node name="time_till_next_bullet" type="Timer" parent="."]
