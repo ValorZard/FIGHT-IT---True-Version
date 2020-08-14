@@ -7,6 +7,7 @@ extends KinematicBody2D
 
 var bullet_speed := 100
 var bullet_direction := Vector2()
+var bullet_velocity := Vector2()
 var life_span := 5 #seconds
 onready var life_timer := get_node("LifeTimer")
 
@@ -20,8 +21,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	bullet_velocity = bullet_speed * bullet_direction 
 	if(life_timer.time_left > 0):
-		move_and_collide(bullet_speed * bullet_direction * delta)
+		#var player_velocity = get_parent().get_parent().player_velocity
+		move_and_collide((bullet_velocity) * delta)
 	else:
 		destroy()
 	pass
@@ -32,9 +35,11 @@ func set_direction(direction):
 #when the bullet hits something
 func on_hit(body):
 	#self.queue_free()
+	destroy()
 	pass
 
 func destroy():
 	self.queue_free()
 	pass
+
 

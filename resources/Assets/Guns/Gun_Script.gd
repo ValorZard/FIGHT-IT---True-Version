@@ -4,9 +4,10 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var bullet_template := preload("res://resources/Assets/Bullets/default_bullet.tscn")
+onready var bullet_template := preload("res://resources/Assets/Bullets/default_bullet.tscn")
+onready var bullet_speed := 300
 onready var time_till_next_bullet := get_node("time_till_next_bullet")
-onready var fire_rate := 0.1 #seconds before next bullet
+onready var fire_rate := 0.5 #seconds before next bullet
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	time_till_next_bullet.start(fire_rate)
@@ -24,8 +25,9 @@ func shoot(direction):
 	if(time_till_next_bullet.time_left <= 0):
 		var bullet := bullet_template.instance()
 		bullet.set_direction(direction)
-		bullet.position = get_node("BulletExit").position
-		get_parent().add_child(bullet)
+		bullet.bullet_speed = bullet_speed
+		bullet.global_position = get_node("BulletExit").global_position
+		get_tree().get_root().add_child(bullet)
 		time_till_next_bullet.start(fire_rate)
 	pass
 
