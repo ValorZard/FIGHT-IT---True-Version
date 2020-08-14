@@ -38,8 +38,13 @@ func on_hit(body):
 	destroy()
 	pass
 
+#destroy bullet
+#might add animations or sounds or something later
 func destroy():
-	self.queue_free()
+	queue_free()
 	pass
 
-
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("Collision"):
+		on_hit(body)
+	pass # Replace with function body.
