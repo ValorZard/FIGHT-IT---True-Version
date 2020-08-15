@@ -7,7 +7,8 @@ extends Node2D
 onready var bullet_template := preload("res://resources/Assets/Bullets/default_bullet.tscn")
 onready var bullet_speed := 300
 onready var time_till_next_bullet := get_node("time_till_next_bullet")
-onready var fire_rate := 0.5 #seconds before next bullet
+onready var fire_rate := 0.2 #seconds before next bullet
+onready var belongs_to_player := true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	time_till_next_bullet.start(fire_rate)
@@ -26,6 +27,7 @@ func shoot(direction):
 		var bullet := bullet_template.instance()
 		bullet.set_direction(direction)
 		bullet.bullet_speed = bullet_speed
+		bullet.belongs_to_player = belongs_to_player
 		bullet.global_position = get_node("BulletExit").global_position
 		get_tree().get_root().add_child(bullet)
 		time_till_next_bullet.start(fire_rate)

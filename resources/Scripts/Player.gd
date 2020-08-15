@@ -18,6 +18,8 @@ var current_direction = Direction.UP
 
 #var player_angle := 0
 
+onready var player_health = 10
+
 var shield_health := 10
 var shield_pressed := false
 
@@ -130,6 +132,10 @@ func do_attack(delta):
 		pass
 	pass
 
+func on_hit(damage):
+	player_health -= damage
+	pass
+
 func _to_string():
 	var player_string := ""
 	player_string += "Current State: "
@@ -167,6 +173,8 @@ func _to_string():
 	player_string += "\n"
 	
 	#player_string += "Angle: " + str(rad2deg(player_angle)) + "\n"
+	
+	player_string += "Health:" + str(player_health) + "\n"
 	
 	player_string += "Shield: " + str(shield_pressed) + "\nShield Health: " + str(shield_health) + "\n"
 	

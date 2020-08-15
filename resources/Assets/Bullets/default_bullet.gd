@@ -8,9 +8,10 @@ extends KinematicBody2D
 var bullet_speed := 100
 var bullet_direction := Vector2()
 var bullet_velocity := Vector2()
+var bullet_damage := 1
 var life_span := 5 #seconds
 onready var life_timer := get_node("LifeTimer")
-
+var belongs_to_player := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,6 +36,14 @@ func set_direction(direction):
 #when the bullet hits something
 func on_hit(body):
 	#self.queue_free()
+	if belongs_to_player:
+		if body is Enemy:
+			body.on_hit(bullet_damage)
+		pass
+	else:
+		if body is Player:
+			body.on_hit(bullet_damage)
+			pass
 	destroy()
 	pass
 
