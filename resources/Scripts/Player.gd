@@ -8,19 +8,21 @@ class_name Player
 # var b = "text"
 var x_input := 0.0
 var y_input := 0.0
-var player_speed := 200.0
-var dash_multiplier := 2.0
+export var player_speed := 200.0
+export var dash_multiplier := 2.0
 var is_dashing := false
 var player_velocity := Vector2()
 
-enum Direction{UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT}
-var current_direction = Direction.UP
+#enum Direction{UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT}
+#var current_direction = Direction.UP
 
 #var player_angle := 0
 
-onready var player_health = 10
+export var default_health = 10
+export(int) onready var player_health = default_health
 
-var shield_health := 10
+export var default_shield := 10
+export(int) onready var shield_health := default_shield
 var shield_pressed := false
 
 var is_shooting := false
@@ -133,7 +135,19 @@ func do_attack(delta):
 	pass
 
 func on_hit(damage):
-	player_health -= damage
+	if(shield_health > 0):
+		shield_health -= damage
+	elif (player_health > 0):
+		player_health -= damage
+	else:
+		death()
+	pass
+
+func death():
+	#RESPAWN
+	#shield_health = default_shield
+	#player_health = default_health
+	#global_position = get_tree().get_root().get_node("LevelWarps/RespawnPoint").global_position
 	pass
 
 func _to_string():

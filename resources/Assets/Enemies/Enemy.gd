@@ -5,29 +5,33 @@ class_name Enemy
 
 #var enemy_angle := 0
 
-onready var enemy_health = 10
+export var default_health := 10
+export(int) var enemy_health := default_health
 
-var shield_health := 10
+export var default_shield := 10
+export(int) var shield_health := default_shield
 var shield_pressed := false
 
-onready var is_shooting := false
+export var is_shooting := true
 
 var gun_direction = Vector2()
-var gun_angle = 0
+export var gun_angle := 0
 
+export var gun_fire_rate := 0.2
 
-onready var current_gun := get_node("Gun")
+export onready var current_gun := get_node("Gun")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	gun_direction = GunMath.rad2vector(gun_angle)
-	#current_gun.belongs_to_player = false
+	gun_direction = GunMath.deg2vector(gun_angle)
+	current_gun.belongs_to_player = false
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	#set_direction()
+	set_gun_values()
 	do_attack(delta)
 	pass
 
@@ -38,14 +42,25 @@ func do_attack(delta):
 		pass
 	pass
 
+func set_gun_values():
+	#current_gun.rotation_degrees = rad2deg(player_angle)
+	current_gun.rotation_degrees = gun_angle
+	current_gun.fire_rate = gun_fire_rate
+	pass
+
 func on_hit(damage):
 	enemy_health -= damage
-	if(enemy_health <= 0):
+	if(shield_health > 0):
+		shield_health -= damage
+	elif(enemy_health > 0):
+		enemy_health -= damage
+	else:
 		death()
 	pass
 
 func death():
 	queue_free()
+	pass
 
 func _to_string():
 	var enemy_string := ""

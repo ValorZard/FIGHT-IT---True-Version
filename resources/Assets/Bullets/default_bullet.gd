@@ -5,13 +5,13 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 
-var bullet_speed := 100
+export var bullet_speed := 100
 var bullet_direction := Vector2()
 var bullet_velocity := Vector2()
-var bullet_damage := 1
-var life_span := 5 #seconds
+export var bullet_damage := 1
+export var life_span := 5 #seconds
 onready var life_timer := get_node("LifeTimer")
-var belongs_to_player := true
+export var belongs_to_player := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

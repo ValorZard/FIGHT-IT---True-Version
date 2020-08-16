@@ -19,3 +19,8 @@ func _ready():
 static func rad2vector(angle):
 	return Vector2(cos(angle), sin(angle))
 	pass
+
+static func deg2vector(angle):
+	angle = deg2rad(angle)
+	return Vector2(cos(angle), sin(angle))
+	pass

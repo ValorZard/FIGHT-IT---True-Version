@@ -1,14 +1,15 @@
 extends Node2D
 
+class_name GunScript
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var bullet_template := preload("res://resources/Assets/Bullets/default_bullet.tscn")
-onready var bullet_speed := 300
-onready var time_till_next_bullet := get_node("time_till_next_bullet")
-onready var fire_rate := 0.2 #seconds before next bullet
-onready var belongs_to_player := true
+export onready var bullet_template := preload("res://resources/Assets/Bullets/default_bullet.tscn")
+export onready var bullet_speed := 300
+export onready var time_till_next_bullet := get_node("time_till_next_bullet")
+export onready var fire_rate := 0.2 #seconds before next bullet
+export onready var belongs_to_player := true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	time_till_next_bullet.start(fire_rate)
