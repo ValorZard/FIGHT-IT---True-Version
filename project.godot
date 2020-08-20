@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://resources/Assets/Enemies/Enemy.gd"
+"path": "res://resources/Scripts/Enemy.gd"
 }, {
 "base": "Node",
 "class": "GunMath",
@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "GunScript",
 "language": "GDScript",
-"path": "res://resources/Assets/Guns/Gun_Script.gd"
+"path": "res://resources/Scripts/Gun_Script.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",

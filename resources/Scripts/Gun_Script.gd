@@ -10,7 +10,6 @@ export var bullet_speed := 100
 export onready var time_till_next_bullet := get_node("time_till_next_bullet")
 export var fire_rate := 0.5 #seconds before next bullet
 export var inbetween_angle := PI/6 #the angle between mulple bullets
-#yeah so i can change in editor at will
 export var belongs_to_player := true
 # Called when the node enters the scene tree for the first time.
 func _ready():
