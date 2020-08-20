@@ -40,7 +40,7 @@ func shoot(direction, number_of_bullets):
 			#loop for the rest of the left bullets
 			var i = 0
 			while (i < ((number_of_bullets)/2)):
-				var offset = Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i))
+				var offset = Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i)).rotated(rotation)
 				spawn_bullet(direction + offset)
 				i += 1
 				pass
@@ -48,7 +48,7 @@ func shoot(direction, number_of_bullets):
 			#loop for the rest of the right side
 			i = 0
 			while (i < ((number_of_bullets)/2)):
-				var offset = Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i))
+				var offset = Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i)).rotated(rotation)
 				spawn_bullet(direction - offset)
 				i += 1
 				pass
