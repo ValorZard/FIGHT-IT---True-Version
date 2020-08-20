@@ -22,6 +22,14 @@ func _ready():
 #func _process(delta):
 #	pass
 
+func spawn_bullet(direction):
+	var bullet := bullet_template.instance()
+	bullet.set_direction(direction)
+	bullet.bullet_speed = bullet_speed
+	bullet.belongs_to_player = belongs_to_player
+	bullet.global_position = get_node("BulletExit").global_position
+	get_tree().get_root().add_child(bullet)
+
 #bullet delay: the amount of time it takes between each bullet to be fired
 #direction - the direction that the bullet will be shot at.
 func shoot(direction, number_of_bullets):
@@ -32,59 +40,34 @@ func shoot(direction, number_of_bullets):
 			#loop for the rest of the left bullets
 			var i = 0
 			while (i < ((number_of_bullets)/2)):
-				var bullet := bullet_template.instance()
 				var offset = Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i))
-				bullet.set_direction(direction + offset)
-				bullet.bullet_speed = bullet_speed
-				bullet.belongs_to_player = belongs_to_player
-				bullet.global_position = get_node("BulletExit").global_position
-				get_tree().get_root().add_child(bullet)
+				spawn_bullet(direction + offset)
 				i += 1
 				pass
 			#right side
 			#loop for the rest of the right side
 			i = 0
 			while (i < ((number_of_bullets)/2)):
-				var bullet := bullet_template.instance()
 				var offset = Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i))
-				bullet.set_direction(direction - offset)
-				bullet.bullet_speed = bullet_speed
-				bullet.belongs_to_player = belongs_to_player
-				bullet.global_position = get_node("BulletExit").global_position
-				get_tree().get_root().add_child(bullet)
-				i+=1
+				spawn_bullet(direction - offset)
+				i += 1
 				pass
 		#THIS CODE DOES WORK
 		else:
 			#middle one
-			var middle_bullet := bullet_template.instance()
-			middle_bullet.set_direction(direction)
-			middle_bullet.bullet_speed = bullet_speed
-			middle_bullet.belongs_to_player = belongs_to_player
-			middle_bullet.global_position = get_node("BulletExit").global_position
-			get_tree().get_root().add_child(middle_bullet)
+			spawn_bullet(direction)
 			#left side
 			var i = 0
 			while (i < ((number_of_bullets- 1)/2)):
-				var bullet := bullet_template.instance()
-				var offset := Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i))
-				bullet.set_direction(direction + offset)
-				bullet.bullet_speed = bullet_speed
-				bullet.belongs_to_player = belongs_to_player
-				bullet.global_position = get_node("BulletExit").global_position
-				get_tree().get_root().add_child(bullet)
+				var offset = Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i))
+				spawn_bullet(direction + offset)
 				i += 1
 				pass
 			#right side
 			i = 0
 			while (i < ((number_of_bullets- 1)/2)):
-				var bullet := bullet_template.instance()
-				var offset := Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i))
-				bullet.set_direction(direction - offset)
-				bullet.bullet_speed = bullet_speed
-				bullet.belongs_to_player = belongs_to_player
-				bullet.global_position = get_node("BulletExit").global_position
-				get_tree().get_root().add_child(bullet)
+				var offset = Vector2(cos(inbetween_angle * i), sin(inbetween_angle * i))
+				spawn_bullet(direction - offset)
 				i += 1
 				pass
 		time_till_next_bullet.start(fire_rate)
