@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resources/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/Scripts/WarpToHouse.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://resources/Assets/Enemies/Enemy.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
 
 [node name="Root" type="Node2D"]
 
@@ -41,6 +43,10 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="RespawnPoint" type="Area2D" parent="LevelWarps"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWarps/RespawnPoint"]
+shape = SubResource( 2 )
+disabled = true
 
 [node name="Enemy" parent="." groups=[
 "Collision",

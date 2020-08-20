@@ -38,7 +38,7 @@ func _physics_process(delta):
 
 func do_attack(delta):
 	if(is_shooting):
-		current_gun.shoot(gun_direction)
+		current_gun.shoot(gun_direction, 2)
 		pass
 	pass
 

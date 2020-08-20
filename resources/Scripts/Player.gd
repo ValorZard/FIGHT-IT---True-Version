@@ -34,7 +34,7 @@ var gun_direction := Vector2()
 enum States{IDLE, WALK, DASH} #ONLY ALLOWED TO HAVE ONE STATE AT A TIME
 var current_state = States.IDLE
 
-onready var current_gun = get_node("Gun")
+onready var current_gun := get_node("Gun")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -130,7 +130,7 @@ func do_during_dash(delta):
 
 func do_attack(delta):
 	if(is_shooting):
-		current_gun.shoot(gun_direction)
+		current_gun.shoot(gun_direction, 5)
 		pass
 	pass
 
@@ -145,9 +145,9 @@ func on_hit(damage):
 
 func death():
 	#RESPAWN
-	#shield_health = default_shield
-	#player_health = default_health
-	#global_position = get_tree().get_root().get_node("LevelWarps/RespawnPoint").global_position
+	shield_health = default_shield
+	player_health = default_health
+	global_position = get_parent().get_node("LevelWarps/RespawnPoint").global_position
 	pass
 
 func _to_string():
