@@ -83,25 +83,6 @@ func set_movement(delta):
 			current_state = States.WALK
 	pass
 
-#func set_direction():
-#	#SET DIRECTION
-#	if(rad2deg(player_angle) > -45/2 and rad2deg(player_angle) < 45/2):
-#		current_direction = Direction.RIGHT
-#	elif(rad2deg(player_angle) > -135/2 and rad2deg(player_angle) < -45/2):
-#		current_direction = Direction.UP_RIGHT
-#	elif(rad2deg(player_angle) > -225/2 and rad2deg(player_angle) < -135/2):
-#		current_direction = Direction.UP
-#	elif(rad2deg(player_angle) > -315/2 and rad2deg(player_angle) < -225/2):
-#		current_direction = Direction.UP_LEFT
-#	elif(rad2deg(player_angle) < -315/2 or rad2deg(player_angle) > 315/2):
-#		current_direction = Direction.LEFT
-#	elif(rad2deg(player_angle) > 225/2 and rad2deg(player_angle) < 315/2):
-#		current_direction = Direction.DOWN_LEFT
-#	elif(rad2deg(player_angle) > 135/2 and rad2deg(player_angle) < 225/2):
-#		current_direction = Direction.DOWN
-#	elif(rad2deg(player_angle) > 45/2 and rad2deg(player_angle) < 135/2):
-#		current_direction = Direction.DOWN_RIGHT
-#	pass
 
 func set_gun_rotation():
 	#current_gun.rotation_degrees = rad2deg(player_angle)
